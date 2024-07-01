@@ -68,30 +68,30 @@ python app.py
 
 このファイル構成を見て、各ファイルの役割は次の通りです：
 
-README.md: プロジェクトの概要や設定方法などを記載するファイル。
-app.py: メインのFlaskアプリケーションのエントリーポイント。
-app_2.py: 追加のFlaskアプリケーションや機能。
-app_py.md: app.pyに関するドキュメントファイル。
-credentials.json: Google APIの認証情報が格納されたファイル。
-install.sh: プロジェクトのインストールやセットアップに関するシェルスクリプト。
-send_email.py: メール送信に関するスクリプト。
-static ディレクトリは静的ファイルを格納する場所です：
+- README.md: プロジェクトの概要や設定方法などを記載するファイル。
+- app.py: メインのFlaskアプリケーションのエントリーポイント。
+- app_2.py: 追加のFlaskアプリケーションや機能。
+- app_py.md: app.pyに関するドキュメントファイル。
+- credentials.json: Google APIの認証情報が格納されたファイル。
+- install.sh: プロジェクトのインストールやセットアップに関するシェルスクリプト。
+- send_email.py: メール送信に関するスクリプト。
+- static ディレクトリは静的ファイルを格納する場所です：
 
-static/css/styles.css: CSSスタイルシート。
-static/js/calendar.js: カレンダー機能に関するJavaScriptファイル。
-static/js/confirm_reservation.js: 予約確認機能に関するJavaScriptファイル。
-templates ディレクトリはHTMLテンプレートを格納する場所です：
+- static/css/styles.css: CSSスタイルシート。
+- static/js/calendar.js: カレンダー機能に関するJavaScriptファイル。
+- static/js/confirm_reservation.js: 予約確認機能に関するJavaScriptファイル。
+- templates ディレクトリはHTMLテンプレートを格納する場所です：
 
-templates/base.html: 他のHTMLテンプレートで使用するベーステンプレート。
-templates/confirm_reservation.html: 予約確認ページのHTMLテンプレート。
-templates/index.html: ホームページのHTMLテンプレート。
-utils ディレクトリはユーティリティ関数を格納する場所です：
+- templates/base.html: 他のHTMLテンプレートで使用するベーステンプレート。
+- templates/confirm_reservation.html: 予約確認ページのHTMLテンプレート。
+- templates/index.html: ホームページのHTMLテンプレート。
+- utils ディレクトリはユーティリティ関数を格納する場所です：
 
-utils/__init__.py: パッケージとして認識させるための空ファイル。
-utils/calendar_service.py: Googleカレンダー関連のサービスを提供するモジュール。
-utils/gmail_service.py: Gmail関連のサービスを提供するモジュール。
-utils/helpers.py: その他の補助的な関数を提供するモジュール。
-__pycache__ フォルダはPythonによって自動生成されたキャッシュファイルを格納します。
+- utils/__init__.py: パッケージとして認識させるための空ファイル。
+- utils/calendar_service.py: Googleカレンダー関連のサービスを提供するモジュール。
+- utils/gmail_service.py: Gmail関連のサービスを提供するモジュール。
+- utils/helpers.py: その他の補助的な関数を提供するモジュール。
+- __pycache__ フォルダはPythonによって自動生成されたキャッシュファイルを格納します。
 
 ## 機能の説明
 
