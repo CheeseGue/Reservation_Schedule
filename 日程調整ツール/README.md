@@ -1,22 +1,3 @@
-# Reservation System
-
-## Setup
-
-1. Clone the repository.
-2. Install the required packages using `pip install flask`.
-3. Run the application using `python app.py`.
-
-## Directory Structure
-
-- `app.py`: The main Flask application.
-- `templates/`: Contains HTML templates.
-- `static/`: Contains static files such as CSS and JavaScript.
-- `README.md`: This file.
-
-
-以下に、日本語で詳細に記述されたREADMEファイルを示します。
-
-```markdown
 # 予約システム
 
 ## 概要
@@ -55,32 +36,62 @@ python app.py
 ## ディレクトリ構成
 
 ```
-reservation-system/
+日程調整ツール
+├── README.md
 ├── app.py
-├── templates/
-│   ├── base.html
-│   ├── index.html
-│   └── confirm_reservation.html
-├── static/
-│   ├── css/
-│   │   └── styles.css
-│   ├── js/
-│   │   └── calendar.js
-|   |   └── confirm_reservation.js
-└── README.md
+├── app_2.py
+├── app_py.md
+├── credentials.json
+├── install.sh
+├── send_email.py
+├── static
+│   ├── css
+│   │   └── styles.css
+│   └── js
+│       ├── calendar.js
+│       └── confirm_reservation.js
+├── templates
+│   ├── base.html
+│   ├── confirm_reservation.html
+│   └── index.html
+└── utils
+    ├── __init__.py
+    ├── __pycache__
+    │   ├── __init__.cpython-311.pyc
+    │   ├── calendar_service.cpython-311.pyc
+    │   ├── gmail_service.cpython-311.pyc
+    │   └── helpers.cpython-311.pyc
+    ├── calendar_service.py
+    ├── gmail_service.py
+    └── helpers.py
 ```
 
-- `app.py`: Flaskアプリケーションのメインファイル。
-- `templates/`: HTMLテンプレートが含まれています。
-  - `base.html`: 基本テンプレート。
-  - `index.html`: 予約システムのカレンダー表示ページ。
-  - `confirm_reservation.html`: 予約確認ページ。
-- `static/`: 静的ファイルが含まれています。
-  - `css/`: CSSファイル。
-    - `styles.css`: スタイルシート。
-  - `js/`: JavaScriptファイル。
-    - `calendar.js`: カレンダーの表示と操作を行うスクリプト。
-- `README.md`: このファイル。
+このファイル構成を見て、各ファイルの役割は次の通りです：
+
+README.md: プロジェクトの概要や設定方法などを記載するファイル。
+app.py: メインのFlaskアプリケーションのエントリーポイント。
+app_2.py: 追加のFlaskアプリケーションや機能。
+app_py.md: app.pyに関するドキュメントファイル。
+credentials.json: Google APIの認証情報が格納されたファイル。
+install.sh: プロジェクトのインストールやセットアップに関するシェルスクリプト。
+send_email.py: メール送信に関するスクリプト。
+static ディレクトリは静的ファイルを格納する場所です：
+
+static/css/styles.css: CSSスタイルシート。
+static/js/calendar.js: カレンダー機能に関するJavaScriptファイル。
+static/js/confirm_reservation.js: 予約確認機能に関するJavaScriptファイル。
+templates ディレクトリはHTMLテンプレートを格納する場所です：
+
+templates/base.html: 他のHTMLテンプレートで使用するベーステンプレート。
+templates/confirm_reservation.html: 予約確認ページのHTMLテンプレート。
+templates/index.html: ホームページのHTMLテンプレート。
+utils ディレクトリはユーティリティ関数を格納する場所です：
+
+utils/__init__.py: パッケージとして認識させるための空ファイル。
+utils/calendar_service.py: Googleカレンダー関連のサービスを提供するモジュール。
+utils/gmail_service.py: Gmail関連のサービスを提供するモジュール。
+utils/helpers.py: その他の補助的な関数を提供するモジュール。
+__pycache__ フォルダはPythonによって自動生成されたキャッシュファイルを格納します。
 
 ## 機能の説明
 
