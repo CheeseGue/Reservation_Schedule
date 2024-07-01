@@ -6,7 +6,14 @@
 <h1>予約確認</h1>
 <div id="reservation-details">
     <!-- 予約詳細がここに表示されます -->
+    <form id="reservation-form">
+        <input type="text" id="name" name="name" placeholder="予約者名">
+        <input type="email" id="email" name="email" placeholder="メールアドレス">
+        <textarea id="memo" name="memo" placeholder="メモ"></textarea>
+        <button type="button" id="confirm-button">予約を確定する</button>
+    </form>
+    
+    
 </div>
-<button id="confirm-button">予約を確定する</button>
 <script src="{{ url_for('static', filename='js/confirm_reservation.js') }}"></script>
 {% endblock %}

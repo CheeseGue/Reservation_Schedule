@@ -21,6 +21,9 @@ function sendReservation() {
     const urlParams = new URLSearchParams(window.location.search);
     const startTimes = JSON.parse(decodeURIComponent(urlParams.get('start_times')));
     const endTimes = JSON.parse(decodeURIComponent(urlParams.get('end_times')));
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const memo = document.getElementById('memo').value;
 
     fetch('/send_reservation', {
         method: 'POST',
@@ -29,7 +32,10 @@ function sendReservation() {
         },
         body: JSON.stringify({
             start_times: startTimes,
-            end_times: endTimes
+            end_times: endTimes,
+            name: name,
+            email: email,
+            memo: memo
         })
     })
     .then(response => response.json())
