@@ -1,34 +1,18 @@
+import os
 from flask import Flask, render_template, request, jsonify
-from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
-import datetime
-import smtplib
 from email.mime.text import MIMEText
+from googleapiclient.errors import HttpError
+import base64
+import datetime
+import pytz
+
+from utils.calendar_service import get_calendar_service, get_free_busy_times
+from utils.gmail_service import get_gmail_service, send_reservation_email
+from utils.helpers import determine_recipient_email
 
 app = Flask(__name__)
-
-SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
-
-def get_calendar_service():
-    flow = InstalledAppFlow.from_client_secrets_file('/Users/ootsuka/Desktop/プログラミング/製作物/日程調整ツール/credentials.json', SCOPES)
-    creds = flow.run_local_server(port=0)
-    service = build('calendar', 'v3', credentials=creds)
-    return service
-
-def get_free_busy_times(service, calendar_id='primary', start_time=None, end_time=None):
-    events_result = service.events().list(
-        calendarId=calendar_id, timeMin=start_time, timeMax=end_time,
-        singleEvents=True, orderBy='startTime').execute()
-    events = events_result.get('items', [])
-    
-    busy_times = []
-    for event in events:
-        start = event['start'].get('dateTime', event['start'].get('date'))
-        end = event['end'].get('dateTime', event['end'].get('date'))
-        busy_times.append((start, end))
-    
-    return busy_times
 
 @app.route('/')
 def index():
@@ -40,7 +24,7 @@ def confirm_reservation():
 
 @app.route('/get_free_busy_times', methods=['POST'])
 def get_free_busy_times_api():
-    data = request.json
+    data = request.get_json()
     start_date = data['start_date']
     end_date = data['end_date']
     
@@ -51,31 +35,31 @@ def get_free_busy_times_api():
 
 @app.route('/send_reservation', methods=['POST'])
 def send_reservation():
-    data = request.json
+    data = request.get_json()
     start_times = data.get('start_times', [])
     end_times = data.get('end_times', [])
 
-    message_content = "予約の詳細:\n"
-    for start, end in zip(start_times, end_times):
-        message_content += f"開始時間: {start}, 終了時間: {end}\n"
+    message_content = "予約詳細:\n"
+    for i, (start_time, end_time) in enumerate(zip(start_times, end_times)):
+        reservation_number = i + 1
 
-    msg = MIMEText(message_content)
-    msg['Subject'] = '予約確認'
+        jst_timezone = pytz.timezone('Asia/Tokyo')
+        start_datetime_jst = pytz.utc.localize(datetime.datetime.strptime(start_time, '%Y-%m-%dT%H:%M:%S.%fZ')).astimezone(jst_timezone)
+        end_datetime_jst = pytz.utc.localize(datetime.datetime.strptime(end_time, '%Y-%m-%dT%H:%M:%S.%fZ')).astimezone(jst_timezone)
+        time_format = '%Y年%m月%d日 %H:%M'
 
-    # 必ずメールアドレスの部分は確認する
-    
-    msg['From'] = 'your_email@example.com'
-    msg['To'] = 'recipient@example.com'
+        message_content += f"{reservation_number}件目: 開始時間: {start_datetime_jst.strftime(time_format)}, 終了時間: {end_datetime_jst.strftime(time_format)}\n"
 
-    try:
-        with smtplib.SMTP('smtp.example.com', 587) as server:
-            server.starttls()
-            server.login('your_email@example.com', 'your_password')
-            server.sendmail('your_email@example.com', 'recipient@example.com', msg.as_string())
-        return jsonify(success=True)
-    except Exception as e:
-        print(f"Failed to send email: {e}")
-        return jsonify(success=False), 500
+    recipient_email = determine_recipient_email(data)
+
+    send_reservation_email(
+        get_gmail_service(),
+        to_email=recipient_email,
+        subject="予約確認",
+        body=message_content
+    )
+
+    return jsonify(success=True)
 
 if __name__ == '__main__':
     app.run(debug=True)
