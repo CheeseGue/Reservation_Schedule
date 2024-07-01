@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    background-color: rgba(255, 255, 255, 0.9); /* Transparent white background */
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 5px;
+}
+
+.calendar div {
+    border: 1px solid #ccc;
+    padding: 10px; /* Increased padding for better spacing */
+    text-align: center;
+}
+
+.calendar .time-slot {
+    grid-column: span 1;
+    background-color: rgba(240, 240, 240, 0.7); /* Transparent light gray */
+}
+
+.calendar .busy {
+    background-color: #ffcccc;
+}
+
+.calendar .free {
+    background-color: #ccffcc;
+    cursor: pointer;
+}
+
+.calendar .selected {
+    background-color: #007bff; /* Blue for selected slots */
+}
+
+.buttons {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.buttons button {
+    padding: 12px 24px; /* Increased padding for better button appearance */
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: #007bff; /* Blue background */
+    color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.buttons button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.nav-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 24px; /* Increased padding for better button appearance */
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}

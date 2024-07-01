@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}予約確認{% endblock %}
+
+{% block content %}
+<h1>予約確認</h1>
+<div id="reservation-details">
+    <!-- 予約詳細がここに表示されます -->
+</div>
+<button id="confirm-button">予約を確定する</button>
+<script src="{{ url_for('static', filename='js/confirm_reservation.js') }}"></script>
+{% endblock %}

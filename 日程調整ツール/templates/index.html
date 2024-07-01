@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}予約システム{% endblock %}
+
+{% block content %}
+<h1>予約システム</h1>
+<div class="buttons">
+    <button class="nav-button" onclick="changeWeek(-1)">＜</button>
+    <div id="week-display"></div>
+    <button class="nav-button" onclick="changeWeek(1)">＞</button>
+</div>
+<div class="calendar" id="calendar">
+    <!-- カレンダーコンテンツ -->
+</div>
+<button id="confirm-button" onclick="confirmReservation()">予約確認をする</button>
+<script src="{{ url_for('static', filename='js/calendar.js') }}"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    loadCalendar();
+});
+
+function changeWeek(direction) {
+    currentDate.setDate(currentDate.getDate() + direction * 7);
+    loadCalendar();
+}
+</script>
+{% endblock %}
